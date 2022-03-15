@@ -1,12 +1,12 @@
-resource "azurerm_resource_group" "bastion" {
+data "azurerm_resource_group" "bastion" {
   name = var.resource_group_name
-  location = var.location
 }
 
 resource "azurerm_network_security_group" "bastion_nsg" {
     name = var.bastion_nsg_name
-    location = azurerm_resource_group.bastion.location
-    resource_group_name = azurerm_resource_group.bastion.name
+    location = var.location != null ? var.location : data.azurerm_resource_group.bastion.location
+    resource_group_name = data.azurerm_resource_group.bastion.name
+    tags = var.tags
 
     dynamic "security_rule" {
         for_each = [for s in var.bastion_nsg_rules : {
@@ -40,17 +40,19 @@ resource "azurerm_subnet_network_security_group_association" "bastion_nsg" {
 
 resource "azurerm_public_ip" "bastion" {
   name = var.bastion_publicip_name
-  resource_group_name = azurerm_resource_group.bastion.name
-  location = azurerm_resource_group.bastion.location
+  resource_group_name = data.azurerm_resource_group.bastion.name
+  location = var.location != null ? var.location : data.azurerm_resource_group.bastion.location
   allocation_method = "Static"
   sku = "Standard"
+  tags = var.tags
 
 }
 
 resource "azurerm_bastion_host" "bastion" {
   name = var.bastion_name
-  resource_group_name = azurerm_resource_group.bastion.name
-  location = azurerm_resource_group.bastion.location
+  resource_group_name = data.azurerm_resource_group.bastion.name
+  location = var.location != null ? var.location : data.azurerm_resource_group.bastion.location
+  tags = var.tags
 
   ip_configuration {
     name = "BastionPubIP"

@@ -1,10 +1,11 @@
 variable "location" {
   type = string
+  default = null
   description = "Locaton to use for the deployment of resources"
 }
 variable "resource_group_name" {
     type = string
-    description = "Resource group name to deploy the Update Management resources into" 
+    description = "Resource group name to deploy the resources into" 
 }
 variable "bastion_name" {
     type = string
@@ -23,6 +24,15 @@ variable "bastion_publicip_name" {
 variable "bastion_nsg_name" {
     type = string
     description = "Bastion Public IP resource name"
+}
+
+variable "tags" {
+  description = "The tags to associate with your resources"
+  type        = map(string)
+
+  default = {
+    ENV = "test"
+  }
 }
 
 variable "bastion_nsg_rules" {
