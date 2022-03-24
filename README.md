@@ -1,6 +1,18 @@
 # terraform-azure-bastion
 Deploys bastion host with a public IP into a subnet and configures the default ports required for Bastion. A subnet and vNet will already need to be deployed and available for the bastion to be deployed into.
 
+## Usage Examples
+Review the examples folder: [examples](./examples)
+
+
+## Deployment
+Perform the following commands on the root folder:
+
+- `terraform init` to get the plugins
+- `terraform plan` to see the infrastructure plan
+- `terraform apply` to apply the infrastructure build
+- `terraform destroy` to destroy the built infrastructure
+
 ## Requirements
 
 No requirements.
