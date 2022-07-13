@@ -57,7 +57,7 @@ variable "bastion_nsg_rules" {
         access                      = "Allow"
         protocol                    = "Tcp"
         source_port_ranges          = "*"
-        destination_port_ranges     = "443,4443"
+        destination_port_ranges     = "443"
         source_address_prefix       = "GatewayManager"
         destination_address_prefix  = "*"
     },
@@ -134,7 +134,7 @@ variable "bastion_nsg_rules" {
         access                      = "Allow"
         protocol                    = "*"
         source_port_ranges          = "*"
-        destination_port_ranges     = "80,443"
+        destination_port_ranges     = "80"
         source_address_prefix       = "*"
         destination_address_prefix  = "Internet"
     },
