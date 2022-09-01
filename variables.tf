@@ -152,3 +152,9 @@ variable "bastion_nsg_rules" {
     ]
   
 }
+
+variable "bastion_diags_log_analytics_id" {
+  description = "Log analytics workspace ID that will be used for storing Bastion diagnostic settings"
+  type = string
+  default = null
+}
