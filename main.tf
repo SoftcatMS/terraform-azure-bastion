@@ -61,3 +61,14 @@ resource "azurerm_bastion_host" "bastion" {
   }
   
 }
+
+resource "azurerm_monitor_diagnostic_setting" "bastion" {
+  name  = "Bastion_Audit_Logs"
+  target_resource_id = azurerm_bastion_host.bastion.id
+  log_log_analytics_workspace_id = var.bastion_diags_log_analytics_id
+  log {
+    category = "BastionAuditLogs"
+    enabled  = "true"
+  }
+
+}
